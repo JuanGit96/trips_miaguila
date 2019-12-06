@@ -1,0 +1,651 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Trips",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/trips": {
+            "get": {
+                "summary": "Mostrar todos los viajessss",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los viajes."
+                    },
+                    "default": {
+                        "description": "error al listar viajes."
+                    }
+                }
+            }
+        },
+        "/api/trips/count": {
+            "get": {
+                "summary": "Mostrar numero de viajes registrados",
+                "operationId": "App\\Http\\Controllers\\TripController::count",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar numero de viajes registrados."
+                    },
+                    "default": {
+                        "description": "error al contar viajes."
+                    }
+                }
+            }
+        },
+        "/api/trips/count/": {
+            "post": {
+                "summary": "Mostrar numero de viajes por ciudad",
+                "operationId": "App\\Http\\Controllers\\TripController::countByCity",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Ciudad para filtrar conteo",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contar viajes registrados por ciudad enviada."
+                    },
+                    "default": {
+                        "description": "error al contar viajes por ciudad."
+                    }
+                }
+            }
+        },
+        "/api/trips/status/{trip_id}": {
+            "get": {
+                "summary": "Estado de viaje",
+                "operationId": "App\\Http\\Controllers\\TripController::statusByTrip",
+                "parameters": [
+                    {
+                        "name": "trip_id",
+                        "in": "path",
+                        "description": "id de registro de viaje",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra estado de viaje enviado."
+                    },
+                    "default": {
+                        "description": "error al mostrar status del viaje."
+                    }
+                }
+            }
+        },
+        "/api/trips/": {
+            "post": {
+                "summary": "Crear viaje",
+                "parameters": [
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "fecha de inicio de viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_pickup_address",
+                        "in": "query",
+                        "description": "Direccion de entrega",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_location_type",
+                        "in": "query",
+                        "description": "Tipo de ubicación de inicio",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_longitude",
+                        "in": "query",
+                        "description": "longitud de inicio",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_latitude",
+                        "in": "query",
+                        "description": "latitud de inicio",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "fecha de fin del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_pickup_address",
+                        "in": "query",
+                        "description": "direccion de  final de entrega",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_pickup_location_type",
+                        "in": "query",
+                        "description": "tipo de localizacion del final del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_longitude",
+                        "in": "query",
+                        "description": "longitud de la direccion final",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_latitude",
+                        "in": "query",
+                        "description": "latitud de la direccion final",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "country_name",
+                        "in": "query",
+                        "description": "nombre del pais",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city_name",
+                        "in": "query",
+                        "description": "ciudad del pais",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passenger_first_name",
+                        "in": "query",
+                        "description": "primer nombre del pasajero",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passenger_last_name",
+                        "in": "query",
+                        "description": "segundo nombre del pasajero",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_first_name",
+                        "in": "query",
+                        "description": "primernombre del conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_last_name",
+                        "in": "query",
+                        "description": "segundo nombre del conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "car_plate",
+                        "in": "query",
+                        "description": "matricula del carro",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status_trip",
+                        "in": "query",
+                        "description": "status del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "check_code_trip",
+                        "in": "query",
+                        "description": "codigo de comprobacion del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price_trip",
+                        "in": "query",
+                        "description": "precio del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_location_type",
+                        "in": "query",
+                        "description": "tipo de localizacion de conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_location_longitude",
+                        "in": "query",
+                        "description": "longitud de localizacion de conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_location_latitude",
+                        "in": "query",
+                        "description": "latitud de localizacion de longitud",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "viaje creado con exito."
+                    },
+                    "default": {
+                        "description": "error al crear viaje."
+                    }
+                }
+            }
+        },
+        "/api/trips/{trip_id}/": {
+            "get": {
+                "summary": "Mostrar un viaje",
+                "parameters": [
+                    {
+                        "name": "trip_id",
+                        "in": "path",
+                        "description": "id de viaje que se quiere viusalizar",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string",
+                            "format": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Visualiza data de viaje seleccionado."
+                    },
+                    "default": {
+                        "description": "Viaje no encontrado."
+                    }
+                }
+            }
+        },
+        "/api/trips/{trip_id}": {
+            "put": {
+                "summary": "Editar viaje",
+                "parameters": [
+                    {
+                        "name": "trip_id",
+                        "in": "path",
+                        "description": "id de viaje a actualizar/modificar",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "fecha de inicio de viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_pickup_address",
+                        "in": "query",
+                        "description": "Direccion de entrega",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_location_type",
+                        "in": "query",
+                        "description": "Tipo de ubicación de inicio",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_longitude",
+                        "in": "query",
+                        "description": "longitud de inicio",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_latitude",
+                        "in": "query",
+                        "description": "latitud de inicio",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "fecha de fin del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_pickup_address",
+                        "in": "query",
+                        "description": "direccion de  final de entrega",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_pickup_location_type",
+                        "in": "query",
+                        "description": "tipo de localizacion del final del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_longitude",
+                        "in": "query",
+                        "description": "longitud de la direccion final",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_latitude",
+                        "in": "query",
+                        "description": "latitud de la direccion final",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "country_name",
+                        "in": "query",
+                        "description": "nombre del pais",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city_name",
+                        "in": "query",
+                        "description": "ciudad del pais",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passenger_first_name",
+                        "in": "query",
+                        "description": "primer nombre del pasajero",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passenger_last_name",
+                        "in": "query",
+                        "description": "segundo nombre del pasajero",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_first_name",
+                        "in": "query",
+                        "description": "primernombre del conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_last_name",
+                        "in": "query",
+                        "description": "segundo nombre del conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "car_plate",
+                        "in": "query",
+                        "description": "matricula del carro",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status_trip",
+                        "in": "query",
+                        "description": "status del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "check_code_trip",
+                        "in": "query",
+                        "description": "codigo de comprobacion del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price_trip",
+                        "in": "query",
+                        "description": "precio del viaje",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_location_type",
+                        "in": "query",
+                        "description": "tipo de localizacion de conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_location_longitude",
+                        "in": "query",
+                        "description": "longitud de localizacion de conductor",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "driver_location_latitude",
+                        "in": "query",
+                        "description": "latitud de localizacion de longitud",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Edita viaje con data enviada."
+                    },
+                    "default": {
+                        "description": "error al actualizar viaje."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Eliminar viaje",
+                "parameters": [
+                    {
+                        "name": "trip_id",
+                        "in": "path",
+                        "description": "id del viaje que se desea eliminar",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminar viaje seleccionado."
+                    },
+                    "default": {
+                        "description": "error al eliminar viaje."
+                    }
+                }
+            }
+        }
+    }
+}
